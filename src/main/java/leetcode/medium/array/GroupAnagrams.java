@@ -14,7 +14,7 @@ public class GroupAnagrams {
         for (int i = 0; i < strs.length; i++) {
             char[] chr = strs[i].toCharArray();
             Arrays.sort(chr);
-            String sorted = new String(chr);                                        // Note - not toString()
+            String sorted = new String(chr);                                        // #note - not toString()
 
             if(!map.containsKey(sorted))
                 map.put(sorted, new ArrayList<>());
