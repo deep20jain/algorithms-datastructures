@@ -1,3 +1,9 @@
 .idea/
-leetcode.iml
+leetcode/leetcode.iml
+leetcode/target
 target/
+geekforgeeks/geekforgeeks.iml
+geekforgeeks/target
+standardimplementations/standardimplementations.iml
+standardimplementations/target
+algorithms-datastructures.iml
