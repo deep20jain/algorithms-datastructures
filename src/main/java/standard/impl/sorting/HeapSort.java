@@ -19,7 +19,6 @@ public class HeapSort {
     }
 
     private void heapify(int[] A, int n, int i) {
-
         int p = i;
         int l = 2 * p + 1;
         int r = 2 * p + 2;

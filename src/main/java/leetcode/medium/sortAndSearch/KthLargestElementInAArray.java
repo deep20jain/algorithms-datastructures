@@ -1,5 +1,9 @@
 package leetcode.medium.sortAndSearch;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Random;
+
 /**
  * Created by deep20jain on 27-04-2018.
  */
@@ -9,53 +13,56 @@ public class KthLargestElementInAArray {
     }
 
     public int findKthLargest(int[] nums, int k) {
-        HeapSort heapSort = new HeapSort();
-        heapSort.sort(nums);
+        QuickSortWithRandomPivot sort = new QuickSortWithRandomPivot();
+        sort.sort(nums);
 
         return nums[nums.length-k];
     }
 
-    private class HeapSort {
-        public void sort(int[] A) {
-            int n = A.length;
-            for (int i = n/2-1; i >= 0; i--) {
-                heapify(A, n, i);
-            }
+    private class QuickSortWithRandomPivot {
+        private Random random;
+        QuickSortWithRandomPivot() {
+            random = new Random();
+        }
 
-            for (int i = n-1; i >= 0 ; i--) {
-                int max = A[0];
-                A[0] = A[i];
-                A[i] = max;
-                heapify(A, i, 0);
+        public void sort(int[] a) {
+            quicksort(a, 0, a.length-1);
+        }
+
+        private void quicksort(int[] a, int low, int high) {
+            if(low < high) {
+                int p = partition_r(a, low, high);
+                quicksort(a, low, p-1);
+                quicksort(a, p+1, high);
             }
         }
 
-        private void heapify(int[] A, int n, int i) {
-
-            int p = i;
-            int l = 2*p+1;
-            int r = 2*p+2;
-            int max = p;
-
-            if(l<n && A[max] < A[l]) {
-                max = l;
-            }
-
-            if(r<n && A[max] < A[r]) {
-                max = r;
-            }
-
-            if(max==p)
-                return;
-
-            swap(A, max, p);
-            heapify(A, n, max);
+        private int partition_r(int[] a, int low, int high) {
+            int r = random.nextInt(high - low + 1) + low;
+            swap(a, r, high);
+            return partition(a, low, high);
         }
 
-        private void swap(int[] a, int max, int p) {
-            int t = a[max];
-            a[max] = a[p];
-            a[p] = t;
+        private int partition(int[] a, int low, int high) {
+            int p = high;
+            int x = low-1;
+
+            for (int i = low; i< high; i++) {                          //#note - < not <=
+                if(a[i] <= a[p]) {
+                    x++;
+                    swap(a, i, x);
+                }
+            }
+
+            x++;
+            swap(a, x, p);
+            return x;
+        }
+
+        private void swap(int[] a, int i, int x) {
+            int t = a[i];
+            a[i] = a[x];
+            a[x] = t;
         }
     }
 }

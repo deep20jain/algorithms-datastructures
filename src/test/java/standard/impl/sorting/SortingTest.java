@@ -32,4 +32,46 @@ public class SortingTest {
             }
         }
     }
+
+    @Test
+    public void testMergeSort() {
+        MergeSort sort = new MergeSort();
+
+        for (int i = 0; i < IN.length; i++) {
+            int[] input = IN[i];
+            sort.sort(input);
+
+            for (int j = 0; j < input.length; j++) {
+                Assert.assertEquals(OUT[i][j], input[j]);
+            }
+        }
+    }
+
+    @Test
+    public void testQuickSort() {
+        QuickSort sort = new QuickSort();
+
+        for (int i = 0; i < IN.length; i++) {
+            int[] input = IN[i];
+            sort.sort(input);
+
+            for (int j = 0; j < input.length; j++) {
+                Assert.assertEquals(OUT[i][j], input[j]);
+            }
+        }
+    }
+
+    @Test
+    public void testQuickSortWihRandomPivot() {
+        QuickSortWithRandomPivot sort = new QuickSortWithRandomPivot();
+
+        for (int i = 0; i < IN.length; i++) {
+            int[] input = IN[i];
+            sort.sort(input);
+
+            for (int j = 0; j < input.length; j++) {
+                Assert.assertEquals(OUT[i][j], input[j]);
+            }
+        }
+    }
 }

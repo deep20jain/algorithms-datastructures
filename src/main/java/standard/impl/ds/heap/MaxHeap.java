@@ -1,4 +1,4 @@
-package standard.impl;
+package standard.impl.ds.heap;
 
 /**
  * Created by deep20jain on 28-04-2018.
@@ -13,6 +13,21 @@ public class MaxHeap {
 
         for (int i = 0; i < A.length; i++) {
             add(A[i]);
+        }
+    }
+
+    private void add(int x) {
+        pq[++elements] = x;
+        bubbleUp();
+    }
+
+    private void bubbleUp() {
+        int p = elements/2;
+        int x = elements;
+        while (p!=0 && pq[p]<pq[x]) {
+            swap(p, x);
+            x = p;
+            p = p/2;
         }
     }
 
@@ -46,21 +61,6 @@ public class MaxHeap {
 
         swap(p, max);
         bubbleDown(max);
-    }
-
-    private void add(int x) {
-        pq[++elements] = x;
-        bubbleUp();
-    }
-
-    private void bubbleUp() {
-        int p = elements/2;
-        int x = elements;
-        while (p!=0 && pq[p]<pq[x]) {
-            swap(p, x);
-            x = p;
-            p = p/2;
-        }
     }
 
     private void swap(int p, int x) {
