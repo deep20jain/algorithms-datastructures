@@ -9,6 +9,7 @@
         <module>geekforgeeks</module>
         <module>leetcode</module>
         <module>standardimplementations</module>
+        <module>EPI</module>
     </modules>
     <packaging>pom</packaging>
 
