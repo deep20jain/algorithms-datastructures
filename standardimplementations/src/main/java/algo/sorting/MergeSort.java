@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * Created by deep20jain on 28-04-2018.
  */
-public class MergeSort {
+public class MergeSort implements Sort {
     public void sort(int[] a) {
         mergesort(a, 0, a.length-1);
     }

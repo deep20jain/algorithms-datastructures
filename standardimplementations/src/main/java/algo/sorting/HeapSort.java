@@ -3,7 +3,7 @@ package algo.sorting;
 /**
  * Created by deep20jain on 28-04-2018.
  */
-public class HeapSort {
+public class HeapSort implements Sort {
     public void sort(int[] A) {
         int n = A.length;
         for (int i = n / 2 - 1; i >= 0; i--) {

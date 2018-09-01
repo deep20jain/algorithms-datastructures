@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by deep20jain on 28-04-2018.
  */
-public class QuickSortWithRandomPivot {
+public class QuickSortWithRandomPivot implements Sort {
     public void sort(int[] a) {
         quicksort(a, 0, a.length-1);
     }

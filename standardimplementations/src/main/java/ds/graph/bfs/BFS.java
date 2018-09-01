@@ -1,25 +1,27 @@
-package ds.graph;
+package ds.graph.bfs;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import ds.graph.Graph;
+
+import java.util.*;
 
 /**
  * Created by deep20jain on 06-05-2018.
  */
 public class BFS {
-    boolean processed[];
-    boolean discovered[];
-    int parent[];
+    boolean[] processed;
+    boolean[] discovered;
+    int[] parent;
+    Graph graph;
 
-    public BFS(int vertices) {
+    public BFS(Graph graph, int vertices) {
         processed = new boolean[vertices];
         discovered = new boolean[vertices];
         parent = new int[vertices];
+        this.graph = graph;
     }
 
-    public Traversed traverse(Graph graph, int start) {
+    public Traversed traverse(int start) {
+        Arrays.fill(parent, -1);
         List<Integer> vertices = new ArrayList<>();
         List<List<Integer>> edges = new ArrayList<>();
 
@@ -36,12 +38,12 @@ public class BFS {
             processVertexEarly(current, vertices);
             processed[current] = true;
 
-            edge = graph.edges[current];
+            edge = graph.getEdges()[current];
 
             while (edge!=null) {
-                neighbour = edge.y;
+                neighbour = edge.getY();
 
-                if(!processed[neighbour] || graph.directed) {
+                if(!processed[neighbour] || graph.isDirected()) {
                     processEdge(current, neighbour, edges);
                 }
 
@@ -51,7 +53,7 @@ public class BFS {
                     parent[neighbour] = current;
                 }
 
-                edge = edge.next;
+                edge = edge.getNext();
             }
             processVertexLate(current, vertices);
         }
@@ -59,13 +61,43 @@ public class BFS {
         return new Traversed(vertices, edges);
     }
 
+    public void findPath(int start, int end, int[] parent, List<Integer> result) {
+        if(start == end || end == -1) {
+            System.out.println(start);
+            result.add(start);
+        } else {
+            findPath(start, parent[end], parent, result);
+            System.out.println(end);
+            result.add(end);
+        }
+    }
 
-    private void processVertexEarly(int current, List<Integer> vertices) {
+    public int findConnectedComponents() {
+        int result = 0;
+        initializeSearch();
+
+        for (int i = 0; i < graph.getNoOfVertices(); i++) {
+            if(!discovered[i]) {
+                result++;
+                traverse(i);
+            }
+        }
+
+        return result;
+    }
+
+    private void initializeSearch() {
+        Arrays.fill(processed, false);
+        Arrays.fill(discovered, false);
+        Arrays.fill(parent, -1);
+    }
+
+    protected void processVertexEarly(int current, List<Integer> vertices) {
         vertices.add(current);
         System.out.println(String.format("Vertex - %d", current));
     }
 
-    private void processEdge(int current, int neighbour, List<List<Integer>> edges) {
+    protected void processEdge(int current, int neighbour, List<List<Integer>> edges) {
         List<Integer> edge = new ArrayList<>();
         edge.add(current);
         edge.add(neighbour);
@@ -73,7 +105,7 @@ public class BFS {
         System.out.println(String.format("Edge - %d %d", current, neighbour));
     }
 
-    private void processVertexLate(int current, List<Integer> vertices) {
+    protected void processVertexLate(int current, List<Integer> vertices) {
         //do nothing
     }
 

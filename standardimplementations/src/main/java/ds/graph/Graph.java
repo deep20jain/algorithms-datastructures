@@ -1,5 +1,8 @@
 package ds.graph;
 
+import ds.graph.bfs.BFS;
+import ds.graph.dfs.DFS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,18 @@ public class Graph {
             this.y = y;
             this.weight = weight;
             this.next = next;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public EdgeNode getNext() {
+            return next;
         }
     }
 
@@ -68,7 +83,32 @@ public class Graph {
     }
 
     public BFS.Traversed bfs() {
-        BFS bfs = new BFS(noOfVertices);
-        return bfs.traverse(this, 0);
+        BFS bfs = new BFS(this, noOfVertices);
+        return bfs.traverse(0);
+    }
+
+    public DFS.Traversed dfs() {
+        DFS dfs = new DFS(this);
+        return dfs.traverse(0);
+    }
+
+    public int getNoOfVertices() {
+        return noOfVertices;
+    }
+
+    public int getNoOfEdges() {
+        return noOfEdges;
+    }
+
+    public boolean isDirected() {
+        return directed;
+    }
+
+    public int[] getDegree() {
+        return degree;
+    }
+
+    public EdgeNode[] getEdges() {
+        return edges;
     }
 }
