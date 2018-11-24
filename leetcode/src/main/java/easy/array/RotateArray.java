@@ -34,7 +34,7 @@ public class RotateArray {
         k = k%n;
         int count = 0;
 
-        for (int i = 0; count < n ; i++) {
+        for (int i = 0; count < n ; i++) {   //note count and not i in condition - this is to identify when to stop juggling
             int start = i;
             int pre = nums[i];
             int next = i;

@@ -10,20 +10,11 @@ public class PlusOne {
     }
 
     public int[] plusOne(int[] digits) {
-        if(digits[digits.length-1]+1<=9) {
-            digits[digits.length-1] = digits[digits.length-1]+1;
-            return digits;
-        }
-
         int i = digits.length-1;
-        int sum = digits[i]+1;
 
-        while (sum>9 && i>=0) {
+        while (i>=0 && digits[i]==9) {
             digits[i]=0;
             i--;
-            if(i==-1)
-                break;
-            sum = digits[i]+1;
         }
 
         if(i>=0){
@@ -35,5 +26,4 @@ public class PlusOne {
         result[0]=1;
         return result;
     }
-
 }

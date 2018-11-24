@@ -1,7 +1,7 @@
 package easy.array;
 
 /**
- * Good One
+ * #beauty
  * Created by deep20jain on 17-03-2018.
  */
 public class MoveZeroes {
